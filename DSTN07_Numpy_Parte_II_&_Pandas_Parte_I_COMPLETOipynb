@@ -1,0 +1,2210 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "DSTN07 - Numpy - Parte II & Pandas Parte I - MATERIAL PROFESSOR .ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.8.3"
+    },
+    "toc": {
+      "base_numbering": 1,
+      "nav_menu": {},
+      "number_sections": true,
+      "sideBar": true,
+      "skip_h1_title": false,
+      "title_cell": "Table of Contents",
+      "title_sidebar": "Contents",
+      "toc_cell": false,
+      "toc_position": {
+        "height": "calc(100% - 180px)",
+        "left": "10px",
+        "top": "150px",
+        "width": "252px"
+      },
+      "toc_section_display": true,
+      "toc_window_display": true
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/joel8716/HelloWorld/blob/master/DSTN07_Numpy_Parte_II_%26_Pandas_Parte_I_COMPLETOipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ohm-S8jeAkL4"
+      },
+      "source": [
+        "# Agenda"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "y2PhoGmpAkL6"
+      },
+      "source": [
+        "> Data: 18/09/2020<br>\n",
+        "> Aula: 04 <br>\n",
+        "> Módulo: 00 <br>\n",
+        "> Instrutores: Bruno Vieira e Maurício Nascimento<br>\n",
+        "> Turma: DSTN07"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "jn4fbwWoAkL7"
+      },
+      "source": [
+        "O objetivo dessa aula é introduzir a biblioteca Numpy.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oDtUO2emAkL7"
+      },
+      "source": [
+        "**Tópicos**:\n",
+        "* Numpy:\n",
+        " - Funções básicas (np.mean, np.std, np.linspace, np.arange, np.random.choice, np.random.int, np.random.rand, np.where)\n",
+        " - Concatenação de Arrays\n",
+        " - Operações entre Arrays\n",
+        "* Pandas:\n",
+        " - Series vs Numpy Arrays\n",
+        " - Inicialização de Series\n",
+        " - Operações Básicas com Series\n",
+        " - Concatenação de Series"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SgT6jbdWAkL8"
+      },
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "15BpKiu8AkL9"
+      },
+      "source": [
+        "# Numpy (Parte II)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "vKhxTyzPAkL9"
+      },
+      "source": [
+        "## Funções Básicas"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "3YV2tvCWAkL-"
+      },
+      "source": [
+        "O Numpy possui algumas funções e submódulos que auxiliam o dia a dia do cientista."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "REkGX6obAkL_",
+        "outputId": "276848d1-35f2-4a3f-82cd-bc0eb9aac321"
+      },
+      "source": [
+        "# Média\n",
+        "np.mean([1,2,3,4])"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2.5"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 9
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1XCofmTFAkMA",
+        "outputId": "637f27d6-6995-48bc-b00e-88355d9d2325"
+      },
+      "source": [
+        "# Desvio Padrão\n",
+        "np.std([1,2,3,4])"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1.118033988749895"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 10
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1BL6_uTjAkMB"
+      },
+      "source": [
+        "O np.arange cria um vetor espaçado entre dois números."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2VukDEd9AkME",
+        "outputId": "cf44f0a3-c9b1-4655-b66a-91cb5dd5d623"
+      },
+      "source": [
+        "# np.arange\n",
+        "np.arange(start=1, stop=20, step=2)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([ 1,  3,  5,  7,  9, 11, 13, 15, 17, 19])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "jFzVTXMGAkME"
+      },
+      "source": [
+        "np.linspace gera um array de n números entre dois valores."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "UwKe18y6AkMF",
+        "outputId": "22e9c45c-c04a-4976-a0a4-a5bc6e705c56"
+      },
+      "source": [
+        "# np.linspace\n",
+        "np.linspace(start=1, stop=10, num=50)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([ 1.        ,  1.18367347,  1.36734694,  1.55102041,  1.73469388,\n",
+              "        1.91836735,  2.10204082,  2.28571429,  2.46938776,  2.65306122,\n",
+              "        2.83673469,  3.02040816,  3.20408163,  3.3877551 ,  3.57142857,\n",
+              "        3.75510204,  3.93877551,  4.12244898,  4.30612245,  4.48979592,\n",
+              "        4.67346939,  4.85714286,  5.04081633,  5.2244898 ,  5.40816327,\n",
+              "        5.59183673,  5.7755102 ,  5.95918367,  6.14285714,  6.32653061,\n",
+              "        6.51020408,  6.69387755,  6.87755102,  7.06122449,  7.24489796,\n",
+              "        7.42857143,  7.6122449 ,  7.79591837,  7.97959184,  8.16326531,\n",
+              "        8.34693878,  8.53061224,  8.71428571,  8.89795918,  9.08163265,\n",
+              "        9.26530612,  9.44897959,  9.63265306,  9.81632653, 10.        ])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 21
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "l-Ly42LuAkMF",
+        "outputId": "c1c821cf-14d8-4b0b-c528-b45e56460252"
+      },
+      "source": [
+        "# np.where \n",
+        "x = np.arange(9).reshape(3, 3)\n",
+        "x\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[0, 1, 2],\n",
+              "       [3, 4, 5],\n",
+              "       [6, 7, 8]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "M9f7HybyAkMG",
+        "outputId": "941aba1f-15ae-4c4a-8cf2-2f1ac41f726a"
+      },
+      "source": [
+        "np.where( x > 2 )"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(array([1, 1, 1, 2, 2, 2]), array([0, 1, 2, 0, 1, 2]))"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tAgisuabAkMG",
+        "outputId": "33bc3d3f-5812-44a4-eef9-d928244137a2"
+      },
+      "source": [
+        "x[np.where(x>2)]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([3, 4, 5, 6, 7, 8])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 22
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ilwGzSgQAkMH"
+      },
+      "source": [
+        "O submódulo random do numpy pode ser utilizado para gerar números aleatórios, selecionar e embaralhar números."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "sBWwcJ9HAkMH",
+        "outputId": "ba8d4912-923d-4a9b-d067-26ec9c11dd45"
+      },
+      "source": [
+        "# escolha aleatória\n",
+        "np.random.choice([1,2,3,4,5], 10)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([5, 3, 2, 4, 2, 2, 3, 3, 5, 4])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_PJSZt5OAkMH"
+      },
+      "source": [
+        "# embaralhamento\n",
+        "x = [1,2,3]\n",
+        "np.random.shuffle(x)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Gz2Gml6VAkMI",
+        "outputId": "7e36129c-cca2-4512-cc87-74c631cd1b4f"
+      },
+      "source": [
+        "x"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[3, 1, 2]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 36
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "NyklmnNyAkMI"
+      },
+      "source": [
+        "## Concatenação Arrays"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XNat7RatAkMJ"
+      },
+      "source": [
+        "Podemos unir 2 ou mais arrays, lateralmente ou verticalmente."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6csC0dwNAkMJ",
+        "outputId": "d444aea8-6d58-42e2-b41a-dc51e89fbece"
+      },
+      "source": [
+        "array = np.arange(9)\n",
+        "array"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([0, 1, 2, 3, 4, 5, 6, 7, 8])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 37
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Yg_PEvIiAkMJ",
+        "outputId": "e5dda54f-de08-4a14-c5b7-41c9046bfbb0"
+      },
+      "source": [
+        "array2D_1 = array.reshape((3,3))\n",
+        "array2D_1"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[0, 1, 2],\n",
+              "       [3, 4, 5],\n",
+              "       [6, 7, 8]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 39
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "buFLAAt1AkMK"
+      },
+      "source": [
+        "array2D_2 = np.arange(10,19).reshape(3,3)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5Lq08vJ3AkMK",
+        "outputId": "a0dbb483-cf94-44d1-f86d-bbe55970a7bb"
+      },
+      "source": [
+        "# concatenação vertical\n",
+        "np.concatenate((array2D_1, array2D_2))"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[ 0,  1,  2],\n",
+              "       [ 3,  4,  5],\n",
+              "       [ 6,  7,  8],\n",
+              "       [10, 11, 12],\n",
+              "       [13, 14, 15],\n",
+              "       [16, 17, 18]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 41
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Wn5l-O5RAkMK",
+        "outputId": "9fc13a6b-10a3-42fe-cdb2-1bc7dec5d327"
+      },
+      "source": [
+        "# concatenação horizontal\n",
+        "np.concatenate((array2D_1,array2D_2),axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[ 0,  1,  2, 10, 11, 12],\n",
+              "       [ 3,  4,  5, 13, 14, 15],\n",
+              "       [ 6,  7,  8, 16, 17, 18]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 42
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bnwCg1rVAkML",
+        "outputId": "0392e07a-d46e-44f9-d18d-3085f5fed1d6"
+      },
+      "source": [
+        "# E como concatenar mais de 2 arrays\n",
+        "np.concatenate((array2D_1, array2D_2, array2D_1, array2D_1))"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[ 0,  1,  2],\n",
+              "       [ 3,  4,  5],\n",
+              "       [ 6,  7,  8],\n",
+              "       [10, 11, 12],\n",
+              "       [13, 14, 15],\n",
+              "       [16, 17, 18],\n",
+              "       [ 0,  1,  2],\n",
+              "       [ 3,  4,  5],\n",
+              "       [ 6,  7,  8],\n",
+              "       [ 0,  1,  2],\n",
+              "       [ 3,  4,  5],\n",
+              "       [ 6,  7,  8]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 46
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1iNRn36gAkML",
+        "outputId": "211f9fd8-9326-4961-a2d7-83f73488b277"
+      },
+      "source": [
+        "array2D_1"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[0, 1, 2],\n",
+              "       [3, 4, 5],\n",
+              "       [6, 7, 8]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 49
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nzNVxhKTAkMM",
+        "outputId": "8d603085-ece4-417a-cc6b-cd8edcf9071e"
+      },
+      "source": [
+        "np.concatenate((array2D_1, np.arange(4).reshape(2,2)))"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "ValueError",
+          "evalue": "all the input array dimensions for the concatenation axis must match exactly, but along dimension 1, the array at index 0 has size 3 and the array at index 1 has size 2",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-51-9e8710b5a036>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mnp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mconcatenate\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0marray2D_1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mnp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0marange\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m4\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mreshape\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m2\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m2\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;32m<__array_function__ internals>\u001b[0m in \u001b[0;36mconcatenate\u001b[0;34m(*args, **kwargs)\u001b[0m\n",
+            "\u001b[0;31mValueError\u001b[0m: all the input array dimensions for the concatenation axis must match exactly, but along dimension 1, the array at index 0 has size 3 and the array at index 1 has size 2"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "SVXo-N2jAkMM"
+      },
+      "source": [
+        "## Operaçõe entre Arrays"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iYUdORlyAkMM"
+      },
+      "source": [
+        "array1 = np.arange(9)\n",
+        "array2 = np.arange(9)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XUobYIEvAkMM",
+        "outputId": "1b148ce7-8ff1-41ab-eecf-2615958c0608"
+      },
+      "source": [
+        "# Soma\n",
+        "array1 + array2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([ 0,  2,  4,  6,  8, 10, 12, 14, 16])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 55
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MVm8Qe4iAkMN",
+        "outputId": "65fb4157-8978-4e98-9de1-8b34e80331ff"
+      },
+      "source": [
+        "# Subtração\n",
+        "array1 - array2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([0, 0, 0, 0, 0, 0, 0, 0, 0])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 56
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HR31vW9wAkMN",
+        "outputId": "6af69794-bba9-4065-ebc4-5901af8e4c58"
+      },
+      "source": [
+        "# Divisão\n",
+        "array1/array2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "<ipython-input-57-f19415e7128b>:2: RuntimeWarning: invalid value encountered in true_divide\n",
+            "  array1/array2\n"
+          ],
+          "name": "stderr"
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([nan,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 57
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "uW0uZLcYAkMN",
+        "outputId": "cfd6cb23-9443-45e6-dead-d44e03c93daf"
+      },
+      "source": [
+        "# Multiplicação\n",
+        "array1*array2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([ 0,  1,  4,  9, 16, 25, 36, 49, 64])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 58
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "hO5jXJHAAkMO"
+      },
+      "source": [
+        "E se tentarmos fazer operações com listas???"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RevMLkq9AkMO",
+        "outputId": "fc91c45b-eda6-4c3e-b7e3-9515f376ee38"
+      },
+      "source": [
+        "[1,2,3] + [4, 5, 6]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[1, 2, 3, 4, 5, 6]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 59
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xtLPsSGgAkMO",
+        "outputId": "5508adf5-4935-47e3-e047-ad531bd649dd"
+      },
+      "source": [
+        "[1,2,3]*[4, 5, 6]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "TypeError",
+          "evalue": "can't multiply sequence by non-int of type 'list'",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-60-0bb36da7bd92>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m2\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m3\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m4\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m5\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m6\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mTypeError\u001b[0m: can't multiply sequence by non-int of type 'list'"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iXZ8I5pNAkMP",
+        "outputId": "d7d5f686-6224-4178-f50f-25c572a212eb"
+      },
+      "source": [
+        "[1,2,3]/[4, 5, 6]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "TypeError",
+          "evalue": "unsupported operand type(s) for /: 'list' and 'list'",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-61-71cd3ca1ec11>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m2\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m3\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m/\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m4\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m5\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m6\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mTypeError\u001b[0m: unsupported operand type(s) for /: 'list' and 'list'"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OQ-VOjq7AkMP",
+        "outputId": "e104d84f-c69c-4eaa-a1af-29e0ea9feef5"
+      },
+      "source": [
+        "[1,2,3]-[4, 5, 6]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "TypeError",
+          "evalue": "unsupported operand type(s) for -: 'list' and 'list'",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-62-1bb72d49e5f1>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m2\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m3\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m4\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m5\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m6\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mTypeError\u001b[0m: unsupported operand type(s) for -: 'list' and 'list'"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "rdF1GpZFAkMP"
+      },
+      "source": [
+        "# Pandas (Parte I)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "KSQRHP9XAkMP"
+      },
+      "source": [
+        "A Series é o objeto base do Pandas, assim como o array é o do numpy."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "cAS5rZYvAkMP"
+      },
+      "source": [
+        "* Três estruturas importantes:\n",
+        "    + `Series`\n",
+        "    + `DataFrame`\n",
+        "    + `Index`"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Sr8Qh8i4AkMQ"
+      },
+      "source": [
+        "## Series vs Numpy"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xHSkf3tvAkMQ"
+      },
+      "source": [
+        "* Visualização\n",
+        "* Índice"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "43IXb3DiAkMQ",
+        "outputId": "7fcd7f46-1a52-493e-93fe-8f53a1696951"
+      },
+      "source": [
+        "# Visualização\n",
+        "# Numpy\n",
+        "np.array([1,2,3])"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([1, 2, 3])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 65
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wQjbWUksAkMQ",
+        "outputId": "590f2814-5e7e-4052-f7b9-d9e4552650f3"
+      },
+      "source": [
+        "# Visualização\n",
+        "pd.Series([1,2,3])"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0    1\n",
+              "1    2\n",
+              "2    3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 68
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "E9vVabdcAkMR"
+      },
+      "source": [
+        "Numpy nos traz um formato horizontal (1D). As Series são Colunas."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zKrYhwJSAkMR"
+      },
+      "source": [
+        "* **Índice**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "bUelknhsAkMR"
+      },
+      "source": [
+        "No Numpy os arrays possuem índices numéricos (0, 1, 2, 3). No Pandas os índices podem ser numéricos e também strings.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "AQzxPqdXAkMR"
+      },
+      "source": [
+        "series_exemplo = pd.Series([1,2,3,4], index=['numero_1', 'numero_2', 'numero_3', 'numero_4'])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bOJq8OaaAkMS",
+        "outputId": "e8131780-2c72-4483-fc03-e0b2b1d443eb"
+      },
+      "source": [
+        "series_exemplo"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "numero_1    1\n",
+              "numero_2    2\n",
+              "numero_3    3\n",
+              "numero_4    4\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 73
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oP1JkHQuAkMS"
+      },
+      "source": [
+        "Podemos acessar o dado como fazíamos nas listas e arrays, por meio do índice."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "qUJlp7XrAkMS",
+        "outputId": "f05f0232-1789-4d92-8c9a-c9c2015c40dd"
+      },
+      "source": [
+        "series_exemplo[0]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 74
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "23ekDPc3AkMS",
+        "outputId": "ae2b1a03-31b8-4066-db92-d5385e4205b0"
+      },
+      "source": [
+        "series_exemplo['numero_1']"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 75
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "GBmXh2AXAkMT",
+        "outputId": "48154c42-fa1c-468a-8778-28300949d01b"
+      },
+      "source": [
+        "series_exemplo['numero_1':'numero_3']"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "numero_1    1\n",
+              "numero_2    2\n",
+              "numero_3    3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 85
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bfhbdeweAkMT",
+        "outputId": "c5038624-88f2-4999-b654-26efef2c140c"
+      },
+      "source": [
+        "series_exemplo[0:3]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "numero_1    1\n",
+              "numero_2    2\n",
+              "numero_3    3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 87
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "0hQDwdO3AkMT"
+      },
+      "source": [
+        "Podemos acessar seus valores\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bJuXXK24AkMU",
+        "outputId": "44ace5aa-b874-40cd-dac5-a51094b3fff0"
+      },
+      "source": [
+        "series_exemplo.values"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([1, 2, 3, 4])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 76
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "hf55UKetAkMU"
+      },
+      "source": [
+        "Podemos acessar seus índices"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iv6DF44SAkMU",
+        "outputId": "851607f7-7864-4fb6-bd28-8d88bd8934ae"
+      },
+      "source": [
+        "series_exemplo.index"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Index(['numero_1', 'numero_2', 'numero_3', 'numero_4'], dtype='object')"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 81
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "slpcDhbdAkMV"
+      },
+      "source": [
+        "## Inicialização de Series"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "OoaKMA-5AkMV"
+      },
+      "source": [
+        "* Podemos construir `Series` partindo do zero. A forma geral de fazer isso é a seguinte:\n",
+        "\n",
+        "```python\n",
+        "pd.Series(data, index = index)\n",
+        "```\n",
+        "* `index` é um argumento opcional e `data` pode ser várias coisas"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nj4-4vdfAkMV",
+        "outputId": "03e2f99f-b4d5-4122-805e-e329fe875385"
+      },
+      "source": [
+        "# Series com um único valor\n",
+        "pd.Series(5, index = [1, 2, 6]) "
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1    5\n",
+              "2    5\n",
+              "6    5\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 83
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XAdTpDXSAkMV",
+        "outputId": "460a9f33-0f82-4814-963a-27f974975719"
+      },
+      "source": [
+        "# Dicionário\n",
+        "pd.Series({2 : 'a', 1 : 'b', 3 : 'c'}) "
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2    a\n",
+              "1    b\n",
+              "3    c\n",
+              "dtype: object"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 84
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Wpae2voCAkMW"
+      },
+      "source": [
+        "## Operações Básicas Com Series"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dNiKh8c5AkMW"
+      },
+      "source": [
+        "series1 = pd.Series([1,2,3], index=['carne', 'carneiro', 'ovelha'])\n",
+        "series2 = pd.Series([1,2,3], index=['ovo', 'carneiro', 'ovelha'])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "C9FtSe5VAkMW",
+        "outputId": "e0fa4d56-b5e0-49a6-da25-4cb648ee3a7f"
+      },
+      "source": [
+        "# Soma\n",
+        "series1 + series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne       NaN\n",
+              "carneiro    4.0\n",
+              "ovelha      6.0\n",
+              "ovo         NaN\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 89
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ioBbN72GAkMW",
+        "outputId": "a05890b9-217c-48b6-98ed-56dadddfe018"
+      },
+      "source": [
+        "# Divisão\n",
+        "series1/series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne       NaN\n",
+              "carneiro    1.0\n",
+              "ovelha      1.0\n",
+              "ovo         NaN\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 92
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pu39oRVDAkMX",
+        "outputId": "eaac16e9-78af-4f09-e29d-eb08cde1361e"
+      },
+      "source": [
+        "# Subtração\n",
+        "series1 - series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne       NaN\n",
+              "carneiro    0.0\n",
+              "ovelha      0.0\n",
+              "ovo         NaN\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 93
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_50h0wKPAkMX",
+        "outputId": "43999650-5cb3-4624-eb28-179a0ccdb14f"
+      },
+      "source": [
+        "# Multiplicação\n",
+        "series1*series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne       NaN\n",
+              "carneiro    4.0\n",
+              "ovelha      9.0\n",
+              "ovo         NaN\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 94
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "bWD1ZF71AkMX"
+      },
+      "source": [
+        "O que é NaN ?"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "80WEmlwQAkMY"
+      },
+      "source": [
+        "Todas as operações são baseadas nos índices."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wyfjGU1EAkMY",
+        "outputId": "1733d37a-3276-4f4f-f7bd-a53ed0d5b4ed"
+      },
+      "source": [
+        "# filtros\n",
+        "series1 > 3"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne       False\n",
+              "carneiro    False\n",
+              "ovelha      False\n",
+              "digital      True\n",
+              "cabra        True\n",
+              "dtype: bool"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 116
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "3WdBrCuGAkMY"
+      },
+      "source": [
+        "o Filtro é como se estivéssemos comparando elemento por elemento e fazendo a comparação desejada."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3wzKtgLRAkMY",
+        "outputId": "22cf1b4a-bc49-4e73-93cc-116dddc636bb"
+      },
+      "source": [
+        "# se quisermos conhecer os valores\n",
+        "series1[series1 > 3]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "digital    23\n",
+              "cabra      10\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 121
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "VIjrdNLIAkMZ",
+        "outputId": "b67b46e0-13b2-4cd7-c917-d4a31982b3e8"
+      },
+      "source": [
+        "series1"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne        1\n",
+              "carneiro     2\n",
+              "ovelha       3\n",
+              "digital     23\n",
+              "cabra       10\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 124
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BjDcoYX9AkMZ",
+        "outputId": "3afbfac0-408c-4a8e-e9b9-4a23914c55f9"
+      },
+      "source": [
+        "# Se quisermos a negação da condição\n",
+        "series1[~(series1>2)]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne       1\n",
+              "carneiro    2\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 128
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "OEeK7SCVAkMZ"
+      },
+      "source": [
+        "O que ganhamos em relação aos dicionários?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "25wxSKnOAkMZ",
+        "outputId": "3b4dc7e5-266d-45f4-c8bd-bf12a19993f3"
+      },
+      "source": [
+        "series1.sum()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "29"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 98
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kwenCtUUAkMa",
+        "outputId": "16728d3e-b5a1-4aa5-859a-1349b738c482"
+      },
+      "source": [
+        "series1.std()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "10.53169818531972"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 99
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "scrolled": true,
+        "id": "awDsgmvhAkMa",
+        "outputId": "84623be0-8647-496c-aeec-bec6ffe1ab33"
+      },
+      "source": [
+        "series1.max()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "23"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 104
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6AiWGtnyAkMa",
+        "outputId": "4c8aafae-4a15-41a9-da85-51855a038ce8"
+      },
+      "source": [
+        "series1.min()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 102
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1CqRG98DAkMb"
+      },
+      "source": [
+        "E se quisermos criar um novo elemento com um novo índice?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MBrVfcx4AkMb"
+      },
+      "source": [
+        "series1['cabra'] = 10"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5m5Xej42AkMb",
+        "outputId": "22405f49-2c38-4301-b3c5-178fbeaecb0b"
+      },
+      "source": [
+        "series1"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne        1\n",
+              "carneiro     2\n",
+              "ovelha       3\n",
+              "digital     23\n",
+              "cabra       10\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 106
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OclhpeEkAkMb",
+        "outputId": "cf13f7ce-a220-4efb-a416-de25f6d6dce8"
+      },
+      "source": [
+        "series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "ovo         1\n",
+              "carneiro    2\n",
+              "ovelha      3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 130
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QqXB-yOVAkMc",
+        "outputId": "81670a14-e27a-45d8-c898-ef5ae46ceeb7"
+      },
+      "source": [
+        "# value counts\n",
+        "series1.value_counts()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "23    1\n",
+              "10    1\n",
+              "3     1\n",
+              "2     1\n",
+              "1     1\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 117
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oSTaVS9vAkMc"
+      },
+      "source": [
+        "Podemos checar se o valor de uma series existe em outra series ou lista."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9INb8hXBAkMc",
+        "outputId": "5811b0fd-8f51-41cd-cfd9-faa7cb9917dd"
+      },
+      "source": [
+        "#isin\n",
+        "#\n",
+        "series1.isin(series2)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne        True\n",
+              "carneiro     True\n",
+              "ovelha       True\n",
+              "digital     False\n",
+              "cabra       False\n",
+              "dtype: bool"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 129
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "UzGJl3M6AkMc",
+        "outputId": "d2420faa-ffac-409a-e95f-99d5792eea93"
+      },
+      "source": [
+        "# operador \n",
+        "series1"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne        1\n",
+              "carneiro     2\n",
+              "ovelha       3\n",
+              "digital     23\n",
+              "cabra       10\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 119
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "T4soLlkqAkMd",
+        "outputId": "52c1c9e3-a762-4bd3-a3f6-a14e9695f458"
+      },
+      "source": [
+        "series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "ovo         1\n",
+              "carneiro    2\n",
+              "ovelha      3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 120
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "uMSJSaLtAkMd"
+      },
+      "source": [
+        "## Concatenação de Series"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5394_WmLAkMd",
+        "outputId": "1307afeb-ecd7-433d-bf9a-073dce8e8ba1"
+      },
+      "source": [
+        "series1 "
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne        1\n",
+              "carneiro     2\n",
+              "ovelha       3\n",
+              "digital     23\n",
+              "cabra       10\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 114
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BzQLS4PGAkMe",
+        "outputId": "5101a89d-3ad6-421e-cc10-1a1e06d1e891"
+      },
+      "source": [
+        "series2"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "ovo         1\n",
+              "carneiro    2\n",
+              "ovelha      3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 115
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Yp0SNUzZAkMe",
+        "outputId": "2ea01302-20c0-4d6d-a971-97e6bfe4c289"
+      },
+      "source": [
+        "pd.concat([series1,series2], axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>0</th>\n",
+              "      <th>1</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>carne</th>\n",
+              "      <td>1.0</td>\n",
+              "      <td>NaN</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>carneiro</th>\n",
+              "      <td>2.0</td>\n",
+              "      <td>2.0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>ovelha</th>\n",
+              "      <td>3.0</td>\n",
+              "      <td>3.0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>digital</th>\n",
+              "      <td>23.0</td>\n",
+              "      <td>NaN</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>cabra</th>\n",
+              "      <td>10.0</td>\n",
+              "      <td>NaN</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>ovo</th>\n",
+              "      <td>NaN</td>\n",
+              "      <td>1.0</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "             0    1\n",
+              "carne      1.0  NaN\n",
+              "carneiro   2.0  2.0\n",
+              "ovelha     3.0  3.0\n",
+              "digital   23.0  NaN\n",
+              "cabra     10.0  NaN\n",
+              "ovo        NaN  1.0"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 113
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_QmB6ZLLAkMe",
+        "outputId": "90ba210a-dc8c-439f-8f41-9aaaf2f01cfe"
+      },
+      "source": [
+        "pd.concat([series1,series2], axis=0)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "carne        1\n",
+              "carneiro     2\n",
+              "ovelha       3\n",
+              "digital     23\n",
+              "cabra       10\n",
+              "ovo          1\n",
+              "carneiro     2\n",
+              "ovelha       3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 112
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2A0luuPVAkMe"
+      },
+      "source": [
+        "# Exercício:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Pen6E8fxAkMf"
+      },
+      "source": [
+        "import pandas as pd"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "l6IHx7ewAkMf"
+      },
+      "source": [
+        "ser1 = pd.Series([1, 2, 3, 4, 5])\n",
+        "ser2 = pd.Series([4, 5, 6, 7, 8])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MAXK9cYJAkMg"
+      },
+      "source": [
+        "Trazer como 2 series os valores que estão em ser1 e não estão em ser2 e vice-versa."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "N_811AfxAkMg",
+        "outputId": "d8bae247-c42a-4023-dce0-473aeb84353c"
+      },
+      "source": [
+        "ser1[~(ser1.isin(ser2))]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0    1\n",
+              "1    2\n",
+              "2    3\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 5
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KabMUY7eAkMh"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
